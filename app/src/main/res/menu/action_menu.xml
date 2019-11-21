@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/btn_home"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/home"
+        />
+
+    <item
+        android:id="@+id/btn_settings"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/settings"
+        />
+
+    <item
+        android:id="@+id/btn_cart"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/cart"
+        />
+</menu>
