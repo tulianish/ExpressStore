@@ -26,5 +26,9 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="proceed">Proceed to <b>pay</b></string>
+    <string name="startShop">Start Shopping</string>
+    <string name="prevOrders">Previous Orders</string>
+    <string name="noOrders"> \t\t\t\tNo Orders \nStart Shopping Now</string>
+
 
 </resources>
