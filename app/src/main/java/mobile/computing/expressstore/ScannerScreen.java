@@ -1,5 +1,6 @@
 package mobile.computing.expressstore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -62,6 +63,9 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
 
         if (result != null) {
             scannedCode = result.getText();
+
+            System.out.println(scannedCode);
+
             fetchProductDetails(scannedCode);
 
             final Handler handler = new Handler();
@@ -116,12 +120,15 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
             @Override
             public void onResponse(String response) {
                 try {
+
+                    if(response.equals("[]")){
+                        Toast.makeText(ScannerScreen.this,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
+                    }
                     JSONArray product=new JSONArray(response);
                     JSONObject each_product = product.getJSONObject(0);
                     String productName=each_product.getString("name");
                     String price=each_product.getString("price");
                     String imageURL=each_product.getString("imgUrl");
-                    System.out.println(scannedCode);
 
                     scannedProductList.add(new Items_Model(scannedCode,imageURL,productName,Double.parseDouble(price),Double.parseDouble(price),1));
 
@@ -134,7 +141,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ScannerScreen.this,error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScannerScreen.this,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -159,19 +166,13 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
 
         switch(id){
             case R.id.btn_home:
-                Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(CartActivity.this,SettingsActivity.class));
+                startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                 break;
             case R.id.btn_settings:
-                Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),SettingsActivity.class));
                 break;
             case R.id.btn_cart:
-                Toast.makeText(this, "cart", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(CartActivity.this,SettingsActivity.class));
-                break;
-            case android.R.id.home:
-                Toast.makeText(this, "back", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(CartActivity.this,SettingsActivity.class));
+                startActivity(new Intent(getApplicationContext(),CartActivity.class));
                 break;
 
         }

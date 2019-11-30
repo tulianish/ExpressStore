@@ -1,5 +1,6 @@
 package mobile.computing.expressstore;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +28,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import mobile.computing.expressstore.Config.Config;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -42,6 +52,12 @@ public class CartActivity extends AppCompatActivity {
     public static Custom_adap adap;
     
     public static Double total_amt=0.0;
+
+
+    private static final int PAYPAL_REQUEST_CODE = 7171;
+    private static PayPalConfiguration config = new PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Config.PAYPAL_CLIENT_ID);
 
     @Override
     protected void onResume() {
@@ -82,7 +98,7 @@ public class CartActivity extends AppCompatActivity {
         items = new ArrayList<>();
 
         //Shared Preferences
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+        final SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
 
         if(prefs.contains("total_amount")) {
 
@@ -227,6 +243,7 @@ public class CartActivity extends AppCompatActivity {
                                 adap.notifyDataSetChanged();
                                 tv_total_items.setText("No Item(s)");
                                 tv_total_amt.setText("$0.0");
+                                prefs.edit().clear().apply();
 
                             }
                         })
@@ -266,9 +283,10 @@ public class CartActivity extends AppCompatActivity {
                             .setMessage("Are you sure you want to proceed to pay?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //startActivity(new Intent(CartActivity.this, Payment.class));
-
-                                    updateData();
+                                    Intent intent = new Intent(CartActivity.this, PayPalService.class);
+                                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+                                    startService(intent);
+                                    paymentProcess();
 
                                 }
                             })
@@ -288,6 +306,17 @@ public class CartActivity extends AppCompatActivity {
 
     }
 
+    public void paymentProcess()
+    {
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(total_amt))
+                , "CAD", "Purchases", PayPalPayment.PAYMENT_INTENT_SALE);
+
+        Intent intent = new Intent(CartActivity.this, com.paypal.android.sdk.payments.PaymentActivity.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        intent.putExtra(com.paypal.android.sdk.payments.PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+    }
+
     // create an action bar button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -304,26 +333,18 @@ public class CartActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
+        save_cart_state();
+        ScannerScreen ss = new ScannerScreen();
+        ss.scannedProductList.clear();
         switch(id){
             case R.id.btn_home:
-                save_cart_state();
-                //Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(CartActivity.this,SettingsActivity.class));
+                startActivity(new Intent(CartActivity.this,HomeActivity.class));
                 break;
             case R.id.btn_settings:
-                save_cart_state();
-                //Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(CartActivity.this,SettingsActivity.class));
                 break;
-            case R.id.btn_cart:
-                //Toast.makeText(this, "cart", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(CartActivity.this,SettingsActivity.class));
-                break;
             case android.R.id.home:
-                save_cart_state();
-                //Toast.makeText(this, "back", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(CartActivity.this,SettingsActivity.class));
+                startActivity(new Intent(CartActivity.this,ScannerScreen.class));
                 break;
 
         }
@@ -379,7 +400,8 @@ public class CartActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void updateData(){
+    // TODO : Need to be removed
+    /*private void updateData(){
 
         String final_url="https://expressstorecsci.000webhostapp.com/update_orders.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, final_url,
@@ -436,5 +458,29 @@ public class CartActivity extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
 
+    }*/
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PAYPAL_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                PaymentConfirmation confirmation = data.getParcelableExtra(com.paypal.android.sdk.payments.PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirmation != null) {
+//                    try {
+//                        String paymentDetails = confirmation.toJSONObject().toString(4);
+//                        Toast.makeText(CartActivity.this,"Payment: "+paymentDetails,Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, PaymentDetails.class));
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+            }
+        } else if (resultCode == com.paypal.android.sdk.payments.PaymentActivity.RESULT_EXTRAS_INVALID) {
+            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -1,6 +1,8 @@
 package mobile.computing.expressstore;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,8 +45,11 @@ public class HomeActivity extends AppCompatActivity {
     private LinkedHashMap<String, List<Items>> orderDetails;
 
     private static String url="https://expressstorecsci.000webhostapp.com/api.php";
- 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +63,6 @@ public class HomeActivity extends AppCompatActivity {
 
         //Get cust_id from user_login activity;
         String cust_id="101";
-
 
         getData();
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
@@ -142,7 +147,7 @@ public class HomeActivity extends AppCompatActivity {
                             itemsList.add(item);
                         }
                         else
-                        {
+                            {
                             itemsList=new ArrayList<>();
                             String prod_name=order.getString("name");
                             String imgUrl=order.getString("imgUrl");
