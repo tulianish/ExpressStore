@@ -36,6 +36,7 @@
     <string name="number">Mobile No</string>
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="old_password">Old Password</string>
+    <string name="logout">Logout</string>
 
 
 </resources>
