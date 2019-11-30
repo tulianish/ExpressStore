@@ -104,7 +104,7 @@ public class CartActivity extends AppCompatActivity {
             ArrayList<String> tempsaleprice = new ArrayList<>();
             ArrayList<String> tempqty = new ArrayList<>();
             ArrayList<String> tempurl = new ArrayList<>();
-            ArrayList<String> id = gson.fromJson(json_proname, tempid.getClass());
+            ArrayList<String> id = gson.fromJson(json_proid, tempid.getClass());
             ArrayList<String> names = gson.fromJson(json_proname, tempnames.getClass());
             ArrayList<String> price = gson.fromJson(json_proprice, tempprice.getClass());
             ArrayList<String> sale_price = gson.fromJson(json_prosaleprice, tempsaleprice.getClass());

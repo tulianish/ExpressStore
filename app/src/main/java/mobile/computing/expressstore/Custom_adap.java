@@ -63,9 +63,8 @@ public class Custom_adap extends RecyclerView.Adapter<Custom_adap.ItemViewHolder
             CartActivity.tv_total_amt.setText("$" + CartActivity.total_amt);
         }
 
-        Picasso.with(con)
-                .load(img_url)
-                .into(holder.item_img);
+        Picasso.get().setLoggingEnabled(true);
+        Picasso.get().load(img_url).resize(65,65).into(holder.item_img);
 
         holder.item_name.setText(name);
         holder.item_name.setSelected(true);
@@ -77,10 +76,10 @@ public class Custom_adap extends RecyclerView.Adapter<Custom_adap.ItemViewHolder
         holder.item_price.setPaintFlags(holder.item_price.getPaintFlags() | Paint.ANTI_ALIAS_FLAG);
         holder.item_sale_price.setVisibility(View.VISIBLE);
 
-        if(price >= sale_price){
+        if(price == sale_price){
             holder.item_price.setText("$"+price+"");
             holder.item_sale_price.setVisibility(View.INVISIBLE);
-        }else{
+        }else if(price > sale_price){
             holder.item_price.setText("$"+price+"");
             holder.item_price.setPaintFlags(holder.item_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.item_sale_price.setText("$"+sale_price+"");
