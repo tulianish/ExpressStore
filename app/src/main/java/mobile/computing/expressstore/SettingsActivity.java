@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +15,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.paypal.android.sdk.payments.LoginActivity;
+
 import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    TextView emailData;
+    SharedPreferences sharedPreferences;
+    TextView emailData, nameData;
+    final static String userPref = "userdata";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +34,14 @@ public class SettingsActivity extends AppCompatActivity {
         setTitle(R.string.settings);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        // Initialization of TextView with email data
+        sharedPreferences = getSharedPreferences(userPref, Context.MODE_PRIVATE);
+
+        // Initialization of TextView
+        nameData = findViewById(R.id.nameData);
         emailData = findViewById(R.id.emailData);
+
+        nameData.setText(sharedPreferences.getString("name", null));
+        emailData.setText(sharedPreferences.getString("email", null));
 
     }
 
@@ -63,24 +74,20 @@ public class SettingsActivity extends AppCompatActivity {
                 intent = new Intent(SettingsActivity.this, EditProfileActivity.class);
                 startActivity(intent);
                 break;
-            // Opens FAQ Setting
-            /*case R.id.faqSection:
-                intent = new Intent();
-                startActivity(intent);
-                break;*/
             // Opens Contact US Setting
             case R.id.contactSection:
                 intent = new Intent(SettingsActivity.this, ContactUsActivity.class);
                 startActivity(intent);
                 break;
-            // Opens Privacy Policy Setting
-            /*case R.id.policySection:
-                intent = new Intent(SettingsActivity.this, null);
-                startActivity(intent);
-                break;*/
             // Opens App Info Setting
             case R.id.infoSection:
                 intent = new Intent(SettingsActivity.this, InfoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.logoutSection:
+                sharedPreferences.edit().clear().apply();
+                // TODO : ADD LOGIN ACTIVITY
+                intent = new Intent(SettingsActivity.this, CartActivity.class);
                 startActivity(intent);
                 break;
         }
