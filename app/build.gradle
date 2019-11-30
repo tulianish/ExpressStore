@@ -32,5 +32,6 @@ dependencies {
     implementation 'me.dm7.barcodescanner:zxing:1.9'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3' // for paypal payments
 
 }

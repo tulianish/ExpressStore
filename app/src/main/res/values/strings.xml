@@ -29,6 +29,13 @@
     <string name="startShop">Start Shopping</string>
     <string name="prevOrders">Previous Orders</string>
     <string name="noOrders"> \t\t\t\tNo Orders \nStart Shopping Now</string>
+    <string name="submit">Submit</string>
+    <string name="message">Message</string>
+    <string name="subject">Subject</string>
+    <string name="we_appreciate_your_feedback">We Appreciate Your Feedback</string>
+    <string name="number">Mobile No</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="old_password">Old Password</string>
 
 
 </resources>
