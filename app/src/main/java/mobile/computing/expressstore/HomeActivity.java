@@ -101,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         switch(id){
 
             case R.id.btn_cart:
-                startActivity(new Intent(HomeActivity.this,Cart.class));
+                startActivity(new Intent(HomeActivity.this,CartActivity.class));
                 break;
             case R.id.btn_settings:
                 startActivity(new Intent(HomeActivity.this,SettingsActivity.class));
