@@ -62,9 +62,16 @@ public class HomeActivity extends AppCompatActivity {
         noOrders = findViewById(R.id.noOrders);
 
         //Get cust_id from user_login activity;
-        String cust_id="101";
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+        SharedPreferences prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        String cust_id = prefs2.getString("customerID","NA");
 
-        getData();
+        if(cust_id.equals("NA")){
+            startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+        }
+
+        getData(cust_id);
+
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener(){
             @Override
             public void onGroupExpand(int groupPosition) {
@@ -82,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(HomeActivity.this,ScannerScreen.class));
+                startActivity(new Intent(HomeActivity.this,ScannerScreen.class));
             }
         });
 
@@ -115,16 +122,11 @@ public class HomeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    
-    
-
-
     /*
     fetches customer order details from api, stores it in a Linked Hash Map and sets the adapter
     of expandableListView for display
      */
-    private void getData(){
+    private void getData(final String userID){
         StringRequest stringRequest=new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
 
             String oldDate="";
@@ -147,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
                             itemsList.add(item);
                         }
                         else
-                            {
+                        {
                             itemsList=new ArrayList<>();
                             String prod_name=order.getString("name");
                             String imgUrl=order.getString("imgUrl");
@@ -208,7 +210,7 @@ public class HomeActivity extends AppCompatActivity {
             protected Map<String,String> getParams()
             {
                 Map<String,String> params = new HashMap<>();
-                params.put("custId","101");
+                params.put("custId",userID);
                 return params;
             }
         };

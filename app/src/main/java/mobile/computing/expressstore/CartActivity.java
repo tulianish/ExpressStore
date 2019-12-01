@@ -50,7 +50,7 @@ public class CartActivity extends AppCompatActivity {
     ImageButton btn_clear, btn_submit;
     public static List<Items_Model> items;
     public static Custom_adap adap;
-    
+
     public static Double total_amt=0.0;
 
 
@@ -99,17 +99,19 @@ public class CartActivity extends AppCompatActivity {
 
         //Shared Preferences
         final SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+        SharedPreferences prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        String userID = prefs2.getString("customerID","0");
 
-        if(prefs.contains("total_amount")) {
+        if(prefs.contains(userID+"_total_amount")) {
 
             Gson gson = new Gson();
-            String json_totamt = prefs.getString("total_amount", "0");
-            String json_proid = prefs.getString("product_id", "NA");
-            String json_proname = prefs.getString("product_names", "NA");
-            String json_proprice = prefs.getString("product_price", "0.0");
-            String json_prosaleprice = prefs.getString("product_sale_price", "0.0");
-            String json_proqty = prefs.getString("product_qty", "0");
-            String json_prourl = prefs.getString("product_url", "NA");
+            String json_totamt = prefs.getString(userID+"_total_amount", "0");
+            String json_proid = prefs.getString(userID+"_product_id", "NA");
+            String json_proname = prefs.getString(userID+"_product_names", "NA");
+            String json_proprice = prefs.getString(userID+"_product_price", "0.0");
+            String json_prosaleprice = prefs.getString(userID+"_product_sale_price", "0.0");
+            String json_proqty = prefs.getString(userID+"_product_qty", "0");
+            String json_prourl = prefs.getString(userID+"_product_url", "NA");
 
             //Toast.makeText(this, ""+json_proname, Toast.LENGTH_SHORT).show();
             //total_amt = Double.valueOf(json_totamt);
@@ -162,18 +164,10 @@ public class CartActivity extends AppCompatActivity {
             }
         }
 
-        //ss.scannedProductList.clear();
-        /*
-
-           if(list from cart is not empty){
-
-                check if item exists in items list, if yes add qty
-                    else, items.add(items);
-           }
-        */
+        ss.scannedProductList.clear();
 
         tv_total_items.setText(items.size() + " Items");
-        tv_total_amt.setText("$" + total_amt);
+        tv_total_amt.setText("$" + String.format("%.2f", total_amt));
 
         adap = new Custom_adap(CartActivity.this, items);
         //Toast.makeText(this, " "+adap.getItemCount(), Toast.LENGTH_SHORT).show();
@@ -202,21 +196,22 @@ public class CartActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 total_amt = 0.0;
-                                tv_total_amt.setText("$"+total_amt);
+                                tv_total_amt.setText("$"+String.format("%.2f", total_amt));
                                 items.remove(position);
                                 adap.notifyDataSetChanged();
+                                save_cart_state();
                                 tv_total_items.setText(items.size() + " Item(s)");
 
                                 if(items.size()==0){
                                     tv_total_items.setText("No Item(s)");
                                     tv_total_amt.setText("$0.0");
                                 }
-                                                            }
+                            }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 total_amt = 0.0;
-                                tv_total_amt.setText("$"+total_amt);
+                                tv_total_amt.setText("$"+String.format("%.2f", total_amt));
                                 adap.notifyDataSetChanged();
                             }
                         })
@@ -354,9 +349,12 @@ public class CartActivity extends AppCompatActivity {
     void save_cart_state(){
         //Shared Preferences
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+        SharedPreferences prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        //Set the values
 
+        String userID = prefs2.getString("customerID","0");
+
+        //Set the values
         Gson gson = new Gson();
         String jsonProductid = "";
         String jsonProductNames = "";
@@ -390,13 +388,13 @@ public class CartActivity extends AppCompatActivity {
         jsonProductURL = gson.toJson(items_URL);
 
         editor.clear();
-        editor.putString("total_amount", total_amt + "");
-        editor.putString("product_id", jsonProductid);
-        editor.putString("product_names", jsonProductNames);
-        editor.putString("product_price", jsonProductPrice);
-        editor.putString("product_sale_price", jsonProductSalePrice);
-        editor.putString("product_qty", jsonProductQty);
-        editor.putString("product_url", jsonProductURL);
+        editor.putString(userID+"_total_amount", total_amt + "");
+        editor.putString(userID+"_product_id", jsonProductid);
+        editor.putString(userID+"_product_names", jsonProductNames);
+        editor.putString(userID+"_product_price", jsonProductPrice);
+        editor.putString(userID+"_product_sale_price", jsonProductSalePrice);
+        editor.putString(userID+"_product_qty", jsonProductQty);
+        editor.putString(userID+"_product_url", jsonProductURL);
         editor.apply();
     }
 
