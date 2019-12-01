@@ -161,5 +161,6 @@
     <orderEntry type="library" name="Gradle: com.android.volley:volley:1.1.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.paypal.sdk:paypal-android-sdk:2.15.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: io.card:android-sdk:5.5.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.scottyab:aescrypt:0.0.1@aar" level="project" />
   </component>
 </module>

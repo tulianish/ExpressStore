@@ -3,8 +3,18 @@ package mobile.computing.expressstore;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Typeface;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,10 +26,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.PasswordAuthentication;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
+import okhttp3.Authenticator;
+
+import static android.provider.Telephony.Carriers.PASSWORD;
 
 public class PaymentDetails extends AppCompatActivity {
 
@@ -45,19 +68,29 @@ public class PaymentDetails extends AppCompatActivity {
             @Override
             public void run() {
 
-                SharedPreferences prefs = getApplicationContext()
-                        .getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.clear().apply();
+                generatePDF();
 
-                Intent intent=new Intent(PaymentDetails.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
             }
         },2500);
 
     }
 
+    private void generatePDF() {
+
+        String date = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        final SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+        SharedPreferences prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        String userID = prefs2.getString("customerID","0");
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear().apply();
+        CartActivity.total_amt=0.0;
+
+        Intent intent=new Intent(PaymentDetails.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private void updateData(){
 
@@ -70,7 +103,6 @@ public class PaymentDetails extends AppCompatActivity {
                         // response
                         Log.d("Response", response);
 
-                        Toast.makeText(getApplicationContext(), ""+response, Toast.LENGTH_SHORT).show();
                         if(response.contains("Item not found!"))
                         {
                             Toast.makeText(getApplicationContext(), "The item deos not exists!", Toast.LENGTH_SHORT).show();
@@ -99,12 +131,13 @@ public class PaymentDetails extends AppCompatActivity {
             protected Map<String, String> getParams()
             {
                 //Shared Preferences
-                SharedPreferences mySharedPreferences = getApplicationContext()
-                        .getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+                SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+                SharedPreferences prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
 
-                String json_proid = mySharedPreferences.getString("product_id", "NA");
-                String json_proqty = mySharedPreferences.getString("product_qty", "0");
-
+                String userID = prefs2.getString("customerID","0");
+                String json_proid = prefs.getString(userID+"_product_id", "NA");
+                String json_proqty = prefs.getString(userID+"_product_qty", "0");
 
 //                ArrayList<String> pro_id = new ArrayList<String>();
 //                ArrayList<Integer> pro_qty = new ArrayList<>();
@@ -118,7 +151,7 @@ public class PaymentDetails extends AppCompatActivity {
 //                String jsonproqty = gson.toJson(pro_qty);
 
                 Map<String, String>  args = new HashMap<String, String>();
-                args.put("userID","101");
+                args.put("userID",userID);
                 args.put("json_qty",json_proqty);
                 args.put("json_proid",json_proid);
 

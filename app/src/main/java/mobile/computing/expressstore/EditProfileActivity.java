@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -66,7 +67,7 @@ public class EditProfileActivity extends AppCompatActivity {
             passwordData = sharedPreferences.getString("password", null);
             name.setText(nameData);
             email.setText(emailData);
-            number.setText(passwordData);
+            number.setText(numberData);
         }
         else
         {
@@ -209,6 +210,18 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        getMenuInflater().inflate(R.menu.action_menu,menu);
+        MenuItem item = menu.findItem(R.id.btn_cart);
+        item.setVisible(false);
+        MenuItem item1 = menu.findItem(R.id.btn_settings);
+        item1.setVisible(false);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
@@ -216,9 +229,12 @@ public class EditProfileActivity extends AppCompatActivity {
         if(id == android.R.id.home)
         {
             this.finish();
+        }else if(id == R.id.home) {
+            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
         }
 
-        return super.onOptionsItemSelected(item);
+
+            return super.onOptionsItemSelected(item);
     }
 
     public void giveAlert()
