@@ -124,16 +124,27 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
                     if(response.equals("[]")){
                         Toast.makeText(ScannerScreen.this,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
                     }
+
                     JSONArray product=new JSONArray(response);
                     JSONObject each_product = product.getJSONObject(0);
                     String productName=each_product.getString("name");
                     String price=each_product.getString("price");
+                    String sale_price=each_product.getString("sale_price");
+                    String isOnSale=each_product.getString("on_sale");
                     String imageURL=each_product.getString("imgUrl");
 
-                    scannedProductList.add(new Items_Model(scannedCode,imageURL,productName,Double.parseDouble(price),Double.parseDouble(price),1));
+                    System.out.println(isOnSale);
+                    System.out.println(scannedCode);
+
+                    if(isOnSale.equals("1")){
+                        scannedProductList.add(new Items_Model(scannedCode,imageURL,productName,Double.parseDouble(price),Double.parseDouble(sale_price),1));
+                    }else if(isOnSale.equals("0")){
+                        scannedProductList.add(new Items_Model(scannedCode,imageURL,productName,Double.parseDouble(price),Double.parseDouble(price),1));
+                    }
 
                     Toast.makeText(ScannerScreen.this, productName+" successfully added to the cart.", Toast.LENGTH_SHORT).show();
-                                    } catch (JSONException e) {
+
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 

@@ -103,7 +103,7 @@ public class SettingsActivity extends AppCompatActivity {
         MenuItem item1 = menu.findItem(R.id.btn_settings);
         item1.setVisible(false);
         MenuItem item2 = menu.findItem(R.id.btn_cart);
-        item1.setVisible(false);
+        item2.setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -115,11 +115,9 @@ public class SettingsActivity extends AppCompatActivity {
         switch(id)
         {
             case R.id.btn_home:
-                Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
                 break;
             case android.R.id.home:
-                Toast.makeText(this, "back", Toast.LENGTH_SHORT).show();
                 this.finish();
                 break;
         }
