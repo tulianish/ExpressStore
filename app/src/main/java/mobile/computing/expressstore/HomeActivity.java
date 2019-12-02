@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        REQUEST);
+                REQUEST);
         askPermission();
 
         //Get cust_id from user_login activity;
@@ -155,7 +155,19 @@ public class HomeActivity extends AppCompatActivity {
                 try {
                     Toast.makeText(getApplicationContext(), storeList.get(0), Toast.LENGTH_SHORT).show();
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("store", storeList.get(0));
+
+                    int store_id;
+
+                    if(storeList.get(0).contains("Atlantic")){
+                        store_id=1;
+                    }else if(storeList.get(0).contains("Walmart")){
+                        store_id=2;
+                    }else{
+                        store_id=3;
+                    }
+
+                    editor.putString("store_name", storeList.get(0));
+                    editor.putString("store_id", store_id+"");
                     editor.apply();
                 } catch (Exception e) {
 //                    Toast.makeText(getApplicationContext(), "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -199,8 +211,6 @@ public class HomeActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
 
             String oldDate="";
-            String prev_order_id="";
-            int flag=0;
             @Override
             public void onResponse(String response) {
                 try {
@@ -208,40 +218,40 @@ public class HomeActivity extends AppCompatActivity {
                     JSONArray orders=new JSONArray(response);
                     for(int i=0;i<orders.length();i++){
                         JSONObject order=orders.getJSONObject(i);
-                        String order_id=order.getString("orderId");
                         String date=order.getString("date");
-
-                        //if the orderId is same, then the item is added to the same list
-                        if(order_id.equals(prev_order_id)) {
-
-                            String prod_name = order.getString("name");
-                            String imgUrl = order.getString("imgUrl");
-                            int price = order.getInt("price");
-                            String priceS = "$" + price;
-                            System.out.println("if  or " + imgUrl + "  " + prod_name);
-                            Items item = new Items(prod_name, priceS, imgUrl);
+                        if(date.equals(oldDate))
+                        {
+                            String prod_name=order.getString("name");
+                            String imgUrl=order.getString("imgUrl");
+                            int price=order.getInt("price");
+                            String priceS="$"+price;
+                            System.out.println("if  or "+ imgUrl+"  "+prod_name);
+                            Items item=new Items(prod_name,priceS,imgUrl);
                             itemsList.add(item);
                         }
                         else
                         {
-                            itemsList = new ArrayList<>();
-                            flag+=1;
-                            oldDate=date.concat(" "+flag);
-                            String prod_name = order.getString("name");
-                            String imgUrl = order.getString("imgUrl");
-                            int price = order.getInt("price");
-                            String priceS = "$" + price;
-                            System.out.println("else  or " + imgUrl + "  " + prod_name);
-                            Items item = new Items(prod_name, priceS, imgUrl);
+                            itemsList=new ArrayList<>();
+                            String prod_name=order.getString("name");
+                            String imgUrl=order.getString("imgUrl");
+                            int price=order.getInt("price");
+                            String priceS="$"+price;
+                            System.out.println("else  or "+ imgUrl+"  "+prod_name);
+                            Items item=new Items(prod_name,priceS,imgUrl);
                             itemsList.add(item);
-
                         }
                         System.out.println("date"+date);
                         System.out.println("oldDate"+oldDate);
-                        orderDetails.put(oldDate,itemsList);
-                        prev_order_id=order_id;
+                        for (Items a:itemsList) {
+                            System.out.println(a.getName()+"  "+a.getPrice());
+
+                        }
+                        orderDetails.put(date,itemsList);
+                        oldDate=date;
 
                     }
+                    System.out.println();
+                    System.out.println(orderDetails);
                     if(orderDetails.isEmpty())
                     {
                         noOrders.setVisibility(View.VISIBLE);
