@@ -117,6 +117,7 @@
     <orderEntry type="library" name="Gradle: com.google.android.material:material:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.picasso:picasso:2.71828@aar" level="project" />
+    <orderEntry type="library" name="Gradle: uk.co.samuelwall:material-tap-target-prompt:2.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth:16.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-api-phone:16.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-auth-base:16.0.0@aar" level="project" />
