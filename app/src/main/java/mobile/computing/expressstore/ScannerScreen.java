@@ -50,6 +50,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
     ZXingScannerView scannerView;
     String product_api_caller = "https://expressstorecsci.000webhostapp.com/getprod.php?prodId=";
     String scannedCode="";
+    public Context cc;
     public static ArrayList<Items_Model> scannedProductList = new ArrayList<>();
 
     @Override
@@ -74,7 +75,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
             scannedCode = scannedCode.substring(0,scannedCode.length()-1);
             System.out.println(scannedCode);
 
-            fetchProductDetails(scannedCode);
+            fetchProductDetails(scannedCode, ScannerScreen.this);
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -108,7 +109,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
         scannerView.stopCamera();
     }
 
-    public void fetchProductDetails(final String scannedCode)
+    public void fetchProductDetails(final String scannedCode, Context con)
     {
         /**
          *
@@ -124,6 +125,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
          *
          */
 
+        cc = con;
 
         StringRequest stringRequest=new StringRequest(product_api_caller+scannedCode, new Response.Listener<String>() {
             @Override
@@ -131,7 +133,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
                 try {
 
                     if(response.equals("[]")){
-                        Toast.makeText(ScannerScreen.this,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(cc,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
                     }else {
 
                         JSONArray product = new JSONArray(response);
@@ -146,18 +148,18 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
                         System.out.println(isOnSale);
                         System.out.println(scannedCode);
 
-                        SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
-                        if (store_id.equals(prefs.getString("store_id", "NA"))) {
+                        SharedPreferences prefs = cc.getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+                        if (store_id.equals(prefs.getString("store_id", "1"))) {
                             if (isOnSale.equals("1")) {
                                 scannedProductList.add(new Items_Model(scannedCode, imageURL, productName, Double.parseDouble(price), Double.parseDouble(sale_price), 1));
                             } else if (isOnSale.equals("0")) {
                                 scannedProductList.add(new Items_Model(scannedCode, imageURL, productName, Double.parseDouble(price), Double.parseDouble(price), 1));
                             }
 
-                            Toast.makeText(ScannerScreen.this, productName + " successfully added to the cart.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(cc, productName + " successfully added to the cart.", Toast.LENGTH_SHORT).show();
 
                         } else {
-                            Toast.makeText(ScannerScreen.this, "This item does not belong to " + prefs.getString("store_name", "the store") + ". Please contact a representative!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(cc, "This item does not belong to " + prefs.getString("store_name", "the store") + ". Please contact a representative!", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -169,11 +171,11 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ScannerScreen.this,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(cc,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        Volley.newRequestQueue(this).add(stringRequest);
+        Volley.newRequestQueue(cc).add(stringRequest);
 
     }
 
