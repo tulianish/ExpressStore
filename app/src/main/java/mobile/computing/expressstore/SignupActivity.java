@@ -54,7 +54,6 @@ public class SignupActivity extends AppCompatActivity {
         cnfpasswrd = findViewById(R.id.cnfpass);
         name = findViewById(R.id.UsrName);
 
-
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,9 +127,6 @@ public class SignupActivity extends AppCompatActivity {
                 {
                     furl = register.concat(name.getText().toString().trim()+"&user_ph="+phonenumber.getText().toString().trim()+"&user_email="+email.getText().toString().trim()+"&user_password="+encryptedpass);
                     registeruser();
-                }
-                else {
-                    Toast.makeText(SignupActivity.this,"Error",Toast.LENGTH_SHORT).show();
                 }
 
             }
