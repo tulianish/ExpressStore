@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
+
 public class HomeActivity extends AppCompatActivity {
 
     public static final int REQUEST=1;
@@ -55,8 +58,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView noOrders;
 
-    private SharedPreferences prefs ;
-    private SharedPreferences prefs2 ;
+    private SharedPreferences prefs, prefs2, prefs3;
 
     private List<String> dates;
     private List<Items> itemsList;
@@ -71,7 +73,9 @@ public class HomeActivity extends AppCompatActivity {
     LocationManager locationManager;
     String l1, l2;
     public String inputCode = "";
+    String tut = "";
 
+    public ScannerScreen manualInput;
 
     @Override
     public void onBackPressed() {
@@ -85,6 +89,11 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getStoreData();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         getStoreData();
     }
 
@@ -96,7 +105,9 @@ public class HomeActivity extends AppCompatActivity {
         //Get cust_id from user_login activity;
         prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
         prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        prefs3 = getApplicationContext().getSharedPreferences("intro", Context.MODE_PRIVATE);
         cust_id = prefs2.getString("customerID","NA");
+        tut = prefs3.getString("tutorial","0");
 
         requestPermissions(new String[]{
                         Manifest.permission.CAMERA,
@@ -106,14 +117,90 @@ public class HomeActivity extends AppCompatActivity {
                 REQUEST);
         askPermission();
 
-         expandableListView = findViewById(R.id.order1);
-        shop = findViewById(R.id.startShop);
+        if(tut.equals("0")) {
+
+            new MaterialTapTargetPrompt.Builder(HomeActivity.this)
+                    .setTarget(R.id.prevOrders)
+                    .setPrimaryText("Track your orders")
+                    .setSecondaryText("A list will display your previous orders made via ExpressStore.")
+                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                        @Override
+                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                            if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                // User has pressed the prompt target
+                                new MaterialTapTargetPrompt.Builder(HomeActivity.this)
+                                        .setTarget(R.id.startShop)
+                                        .setPrimaryText("Start Scanning Barcode")
+                                        .setSecondaryText("Tap this button to scan the barcode of the products to be purchased.")
+                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                            @Override
+                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                    // User has pressed the prompt target
+                                                    new MaterialTapTargetPrompt.Builder(HomeActivity.this)
+                                                            .setTarget(R.id.startScan)
+                                                            .setPrimaryText("Enter Barcode Manually")
+                                                            .setSecondaryText("Tap this button to enter the barcode of the products manually.")
+                                                            .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                                                @Override
+                                                                public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                                    if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                        // User has pressed the prompt target
+                                                            new MaterialTapTargetPrompt.Builder(HomeActivity.this)
+                                                                    .setTarget(R.id.btn_cart)
+                                                                    .setPrimaryText("Your Cart")
+                                                                    .setSecondaryText("Tap this button to see the items that you have scanned.")
+                                                                    .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                                                        @Override
+                                                                        public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                                            if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                                // User has pressed the prompt target
+                                                                                new MaterialTapTargetPrompt.Builder(HomeActivity.this)
+                                                                                        .setTarget(R.id.btn_settings)
+                                                                                        .setPrimaryText("Settings")
+                                                                                        .setSecondaryText("Tap this button to access the settings and Edit Profile option.")
+                                                                                        .setPromptStateChangeListener(new MaterialTapTargetPrompt.PromptStateChangeListener() {
+                                                                                            @Override
+                                                                                            public void onPromptStateChanged(MaterialTapTargetPrompt prompt, int state) {
+                                                                                                if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                                                                                                    // User has pressed the prompt target
+                                                                                                    prefs3.edit().putString("tutorial", "1").apply();
+                                                                                                    tut = "1";
+                                                                                                }
+                                                                                            }
+                                                                                        })
+                                                                                        .show();
+
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                    .show();
+                                                        }
+                                                    }
+                                                }).show();
+
+                                                }
+                                            }
+                                        })
+                                        .show();
+                            }
+                        }
+                    })
+                    .show();
+        }
+
+
+        expandableListView = findViewById(R.id.order1);
         noOrders = findViewById(R.id.noOrders);
+
+        shop = findViewById(R.id.startShop);
         manuallyAdd = findViewById(R.id.startScan);
+
+        manualInput = new ScannerScreen();
 
         requestQueue = Volley.newRequestQueue(this);
         storeList = new ArrayList<>();
-        final ScannerScreen manualInput = new ScannerScreen();
+
         getStoreData();
         getStoreData();
 
