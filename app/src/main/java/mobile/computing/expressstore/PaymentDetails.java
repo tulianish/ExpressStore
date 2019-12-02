@@ -56,6 +56,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class PaymentDetails extends AppCompatActivity {
 
@@ -74,7 +76,7 @@ public class PaymentDetails extends AppCompatActivity {
         actionBar.hide();
 
         // Toast to let user know
-        Toast.makeText(this,"Back to home-screen in 2 second", Toast.LENGTH_SHORT).show();
+        Toasty.success(this,"Payment Success! Back to Home Screen in 2 second", Toast.LENGTH_SHORT, true).show();
 
         updateData();
 
@@ -182,10 +184,10 @@ public class PaymentDetails extends AppCompatActivity {
         File filePath = new File(targetPdf);
         try {
             document.writeTo(new FileOutputStream(filePath));
-            Toast.makeText(this, "Bill saved under ExpressStore folder!", Toast.LENGTH_LONG).show();
+            Toasty.info(this, "Bill saved under ExpressStore folder!", Toast.LENGTH_LONG, true).show();
         } catch (IOException e) {
             Log.e("main", "error "+e.toString());
-            Toast.makeText(this, "Something's wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
+            Toasty.error(this, "Something's wrong: " + e.toString(),  Toast.LENGTH_LONG, true).show();
         }
         // close the document
         document.close();
@@ -199,7 +201,7 @@ public class PaymentDetails extends AppCompatActivity {
             if(Runtime.getRuntime().exec(command).waitFor() < 5){
                 new sendemail().execute();
             }else{
-                Toast.makeText(this, "Could not send the bill via mail! Weak Internet connectivity detected.", Toast.LENGTH_LONG).show();
+                Toasty.error(this, "Could not send the bill via mail! Weak Internet connectivity detected.", Toast.LENGTH_LONG, true).show();
                 Intent intent=new Intent(PaymentDetails.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
@@ -224,15 +226,15 @@ public class PaymentDetails extends AppCompatActivity {
 
                         if(response.contains("Item not found!"))
                         {
-                            Toast.makeText(getApplicationContext(), "The item deos not exists!", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "The item deos not exists!", Toast.LENGTH_SHORT, true).show();
                         }
                         else if(response.contains("Out of stock!"))
                         {
-                            Toast.makeText(getApplicationContext(), "The item is out of stock or in less quantity!", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "The item is out of stock or in less quantity!", Toast.LENGTH_SHORT, true).show();
                         }
                         else if(response.length()>0)
                         {
-                            Toast.makeText(getApplicationContext(), "Server Error! Please try again later.", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Server Error! Please try again later.", Toast.LENGTH_SHORT, true).show();
                         }
                     }
                 },

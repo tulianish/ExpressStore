@@ -29,6 +29,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import es.dmoral.toasty.Toasty;
+
 public class EditProfileActivity extends AppCompatActivity {
 
     TextInputEditText name, email, number, password, confirmPassword;
@@ -77,7 +79,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(this,"Login First", Toast.LENGTH_SHORT).show();
+            Toasty.info(this,"Login First", Toast.LENGTH_SHORT, true).show();
             Intent intent = new Intent(EditProfileActivity.this, LoginActivity.class);
         }
 
@@ -184,15 +186,15 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 if(response.equals("0"))
                 {
-                    Toast.makeText(EditProfileActivity.this,"Server Error! Please try again.",Toast.LENGTH_SHORT).show();
+                    Toasty.error(EditProfileActivity.this,"Server Error! Please try again.",Toast.LENGTH_SHORT, true).show();
                 }
-                Toast.makeText(EditProfileActivity.this,"Profile Updated!",Toast.LENGTH_SHORT).show();
+                Toasty.success(EditProfileActivity.this,"Profile Updated!",Toast.LENGTH_SHORT, true).show();
 
             }
             }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(EditProfileActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toasty.error(EditProfileActivity.this,error.getMessage(),Toast.LENGTH_SHORT, true).show();
             }
             })
         {

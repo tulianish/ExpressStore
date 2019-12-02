@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import es.dmoral.toasty.Toasty;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class ScannerScreen extends AppCompatActivity implements ZXingScannerView.ResultHandler {
@@ -90,7 +91,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
             }, 3000);
 
         }else{
-            Toast.makeText(this, "Item not found! Please contact the representative.", Toast.LENGTH_SHORT).show();
+            Toasty.error(this, "Item not found! Please contact the representative.", Toast.LENGTH_SHORT, true).show();
         }
 
 
@@ -133,7 +134,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
                 try {
 
                     if(response.equals("[]")){
-                        Toast.makeText(cc,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
+                        Toasty.error(cc,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT, true).show();
                     }else {
 
                         JSONArray product = new JSONArray(response);
@@ -156,10 +157,11 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
                                 scannedProductList.add(new Items_Model(scannedCode, imageURL, productName, Double.parseDouble(price), Double.parseDouble(price), 1));
                             }
 
-                            Toast.makeText(cc, productName + " successfully added to the cart.", Toast.LENGTH_SHORT).show();
+                            //Toasty.info(cc, productName + " successfully added to the cart.", Toast.LENGTH_SHORT, true).show();
+                            Toasty.info(cc, "Product added to the cart.", Toast.LENGTH_SHORT, true).show();
 
                         } else {
-                            Toast.makeText(cc, "This item does not belong to " + prefs.getString("store_name", "the store") + ". Please contact a representative!", Toast.LENGTH_SHORT).show();
+                            Toasty.error(cc, "This item does not belong to " + prefs.getString("store_name", "the store") + ". Please contact a representative!", Toast.LENGTH_SHORT, true).show();
                         }
                     }
 
@@ -171,7 +173,7 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(cc,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT).show();
+                Toasty.error(cc,"The item does not exists! Please contact a representative.", Toast.LENGTH_SHORT, true).show();
             }
         });
 

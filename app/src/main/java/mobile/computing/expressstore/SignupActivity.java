@@ -20,6 +20,8 @@ import com.scottyab.aescrypt.AESCrypt;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import es.dmoral.toasty.Toasty;
+
 public class SignupActivity extends AppCompatActivity {
 
     private Button signup;
@@ -183,16 +185,16 @@ public class SignupActivity extends AppCompatActivity {
                 try {
                     if (response.equals("-1"))
                     {
-                        Toast.makeText(SignupActivity.this,"Email Already Registered",Toast.LENGTH_SHORT).show();
+                        Toasty.warning(SignupActivity.this,"Email Already Registered",Toast.LENGTH_SHORT, true).show();
                     }
                     else if(response.equals("1"))
                     {
-                       Toast.makeText(SignupActivity.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
+                       Toasty.success(SignupActivity.this,"Registered Successfully",Toast.LENGTH_SHORT, true).show();
                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                     }
                     else
                     {
-                        Toast.makeText(SignupActivity.this,"Registration Failed",Toast.LENGTH_SHORT).show();
+                        Toasty.error(SignupActivity.this,"Registration Failed",Toast.LENGTH_SHORT, true).show();
                     }
 
                 } catch (Exception e) {
@@ -202,7 +204,7 @@ public class SignupActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SignupActivity.this,error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toasty.error(SignupActivity.this,error.getMessage(), Toast.LENGTH_SHORT, true).show();
             }
         });
 

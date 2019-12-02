@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
 import mobile.computing.expressstore.Config.Config;
 
 public class CartActivity extends AppCompatActivity {
@@ -294,7 +295,7 @@ public class CartActivity extends AppCompatActivity {
                             .setCancelable(false)
                             .show();
                 }else{
-                    Toast.makeText(CartActivity.this, "Please add items to the cart!", Toast.LENGTH_SHORT).show();
+                    Toasty.error(CartActivity.this, "Please add items to the cart!", Toast.LENGTH_SHORT, true).show();
                 }
             }
         });
@@ -475,10 +476,10 @@ public class CartActivity extends AppCompatActivity {
 //                    }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+                Toasty.warning(this, "Canceled", Toast.LENGTH_SHORT, true).show();
             }
         } else if (resultCode == com.paypal.android.sdk.payments.PaymentActivity.RESULT_EXTRAS_INVALID) {
-            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+            Toasty.error(this, "Invalid", Toast.LENGTH_SHORT, true).show();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
