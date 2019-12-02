@@ -39,6 +39,12 @@ public class EditProfileActivity extends AppCompatActivity {
     final static String userPref = "userdata";
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
