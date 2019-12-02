@@ -82,6 +82,94 @@ public class PaymentDetails extends AppCompatActivity {
         final SharedPreferences prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
         SharedPreferences prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
         String userID = prefs2.getString("customerID","0");
+        String cid = "Customer Name: "+userID;
+        String cname = "Customer Name: "+prefs2.getString("name","Customer Name");
+        String cemail = "Customer Email: "+prefs2.getString("email","Customer E-mail");
+        String cnumber = "Customer Contact: "+prefs2.getString("number","Customer Contact");
+
+        Gson gson = new Gson();
+        String json_totamt = prefs.getString(userID+"_total_amount", "0");
+        String json_proname = prefs.getString(userID+"_product_names", "NA");
+        String json_prosaleprice = prefs.getString(userID+"_product_sale_price", "0.0");
+        String json_proqty = prefs.getString(userID+"_product_qty", "0");
+
+        ArrayList<String> tempnames = new ArrayList<>();
+        ArrayList<String> tempsaleprice = new ArrayList<>();
+        ArrayList<String> tempqty = new ArrayList<>();
+        ArrayList<String> names = gson.fromJson(json_proname, tempnames.getClass());
+        ArrayList<String> sale_price = gson.fromJson(json_prosaleprice, tempsaleprice.getClass());
+        ArrayList<String> qty = gson.fromJson(json_proqty, tempqty.getClass());
+
+
+        PdfDocument document = new PdfDocument();
+        // crate a page description
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        // start a page
+        PdfDocument.Page page = document.startPage(pageInfo);
+        Canvas canvas = page.getCanvas();
+        Paint paint = new Paint();
+        Paint paint2 = new Paint();
+
+        paint.setTextSize(5.5f);
+        paint2.setTextSize(5.5f);
+
+        paint2.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
+        Bitmap b=BitmapFactory.decodeResource(getResources(), R.drawable.logo1);
+        paint.setColor(Color.RED);
+        canvas.drawBitmap(b, null, new RectF(8, 5, 80, 60), null);
+        paint.setColor(Color.BLACK);
+
+        canvas.drawText(date, 230, 55, paint);
+
+        canvas.drawText(cid, 20, 80, paint2);
+        canvas.drawText(cname, 20, 90, paint2);
+        canvas.drawText(cemail, 20, 100, paint2);
+        canvas.drawText(cnumber, 20, 110, paint2);
+
+        canvas.drawLine(10,120,290,120,paint);
+
+        canvas.drawText("ORDER", 20, 130, paint);
+
+        int y=140;
+        String content="";
+        for (int i = 0; i < names.size(); i++) {
+            y+=10;
+            content=(i+1)+". "+names.get(i)+"    -    [  "+qty.get(i)+"  ]   x   [  "+sale_price.get(i)+"  ]";
+            canvas.drawText(content, 20, y , paint);
+        }
+
+        canvas.drawLine(10,y+10,290,y+10,paint);
+        String tot = "Total: "+String.format("%.2f", Double.parseDouble(json_totamt));
+        canvas.drawText(tot,20,y+20,paint2);
+
+        //canvas.drawRect(10,y+60,360,y+60,paint3);
+
+        canvas.drawLine(10,60,290,60,paint); //top
+        canvas.drawLine(10,y+30,290,y+30,paint); //bottom
+        canvas.drawLine(10,60,10,y+30,paint); //left
+        canvas.drawLine(290,60,290,y+30,paint); // right
+        //canvas.drawRect(10,60,360,y+60,paint3);
+
+        document.finishPage(page);
+
+        // write the document content
+        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/ExpressStore/";
+        File file = new File(directory_path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        String targetPdf = directory_path+userID+", "+date+", Bill.pdf";
+        File filePath = new File(targetPdf);
+        try {
+            document.writeTo(new FileOutputStream(filePath));
+            Toast.makeText(this, "Bill saved under ExpressStore folder!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            Log.e("main", "error "+e.toString());
+            Toast.makeText(this, "Something wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
+        }
+        // close the document
+        document.close();
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear().apply();
