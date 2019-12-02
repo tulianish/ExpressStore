@@ -199,6 +199,8 @@ public class HomeActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,url, new Response.Listener<String>() {
 
             String oldDate="";
+            String prev_order_id="";
+            int flag=0;
             @Override
             public void onResponse(String response) {
                 try {
@@ -206,40 +208,40 @@ public class HomeActivity extends AppCompatActivity {
                     JSONArray orders=new JSONArray(response);
                     for(int i=0;i<orders.length();i++){
                         JSONObject order=orders.getJSONObject(i);
+                        String order_id=order.getString("orderId");
                         String date=order.getString("date");
-                        if(date.equals(oldDate))
-                        {
-                            String prod_name=order.getString("name");
-                            String imgUrl=order.getString("imgUrl");
-                            int price=order.getInt("price");
-                            String priceS="$"+price;
-                            System.out.println("if  or "+ imgUrl+"  "+prod_name);
-                            Items item=new Items(prod_name,priceS,imgUrl);
+
+                        //if the orderId is same, then the item is added to the same list
+                        if(order_id.equals(prev_order_id)) {
+
+                            String prod_name = order.getString("name");
+                            String imgUrl = order.getString("imgUrl");
+                            int price = order.getInt("price");
+                            String priceS = "$" + price;
+                            System.out.println("if  or " + imgUrl + "  " + prod_name);
+                            Items item = new Items(prod_name, priceS, imgUrl);
                             itemsList.add(item);
                         }
                         else
                         {
-                            itemsList=new ArrayList<>();
-                            String prod_name=order.getString("name");
-                            String imgUrl=order.getString("imgUrl");
-                            int price=order.getInt("price");
-                            String priceS="$"+price;
-                            System.out.println("else  or "+ imgUrl+"  "+prod_name);
-                            Items item=new Items(prod_name,priceS,imgUrl);
+                            itemsList = new ArrayList<>();
+                            flag+=1;
+                            oldDate=date.concat(" "+flag);
+                            String prod_name = order.getString("name");
+                            String imgUrl = order.getString("imgUrl");
+                            int price = order.getInt("price");
+                            String priceS = "$" + price;
+                            System.out.println("else  or " + imgUrl + "  " + prod_name);
+                            Items item = new Items(prod_name, priceS, imgUrl);
                             itemsList.add(item);
+
                         }
                         System.out.println("date"+date);
                         System.out.println("oldDate"+oldDate);
-                        for (Items a:itemsList) {
-                            System.out.println(a.getName()+"  "+a.getPrice());
-
-                        }
-                        orderDetails.put(date,itemsList);
-                        oldDate=date;
+                        orderDetails.put(oldDate,itemsList);
+                        prev_order_id=order_id;
 
                     }
-                    System.out.println();
-                    System.out.println(orderDetails);
                     if(orderDetails.isEmpty())
                     {
                         noOrders.setVisibility(View.VISIBLE);

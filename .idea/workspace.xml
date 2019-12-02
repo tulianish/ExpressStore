@@ -14,9 +14,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
@@ -31,10 +28,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_card_android_sdk_5_5_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__io_card_android_sdk_5_5_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__me_dm7_barcodescanner_core_1_9_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__me_dm7_barcodescanner_core_1_9_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/SignupActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/forgotpassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/forgotpassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ExpandableListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ExpandableListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -49,7 +45,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="356b19b5" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="45636d1" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -59,13 +55,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
+            <state relative-caret-position="75">
               <caret line="68" column="25" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ExpandableListAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="586">
+              <caret line="121" column="9" lean-forward="true" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1402">
+              <caret line="276" selection-start-line="276" selection-end-line="276" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#onCreateOptionsMenu#0;class#HomeActivity#0" />
+                <element signature="method#askPermission#0;class#HomeActivity#0" />
+                <element signature="method#getLocation#0;class#HomeActivity#0" />
+                <element signature="method#getGPS#0;class#HomeActivity#0" />
               </folding>
             </state>
           </provider>
@@ -106,7 +130,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/menu/action_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ExpandableListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
@@ -134,8 +157,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ContactUsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_list.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/SettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
@@ -148,6 +169,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/SignupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ExpandableListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java" />
       </list>
     </option>
   </component>
@@ -165,6 +189,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -192,7 +217,6 @@
         </subPane>
       </pane>
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -308,11 +332,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="804" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.1416309" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14145234" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -323,10 +347,10 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.53966004" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Android Profiler" order="3" />
+      <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="6" visible="true" weight="0.32510886" />
+      <window_info anchor="bottom" id="Build" order="6" visible="true" weight="0.32405892" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.32152975" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.3286119" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.3286517" />
@@ -570,21 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="81" column="23" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#onCreateOptionsMenu#0;class#HomeActivity#0" />
-            <element signature="method#getData#0;class#HomeActivity#0" />
-            <element signature="method#askPermission#0;class#HomeActivity#0" />
-            <element signature="method#getLocation#0;class#HomeActivity#0" />
-            <element signature="method#getGPS#0;class#HomeActivity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/SettingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
@@ -594,13 +603,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ExpandableListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="103" column="46" selection-start-line="103" selection-start-column="46" selection-end-line="103" selection-end-column="46" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/EditProfileActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -641,12 +643,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="430">
           <caret line="29" column="49" lean-forward="true" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
@@ -676,10 +678,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="75">
           <caret line="68" column="25" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/ExpandableListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="121" column="9" lean-forward="true" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/mobile/computing/expressstore/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1402">
+          <caret line="276" selection-start-line="276" selection-end-line="276" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreateOptionsMenu#0;class#HomeActivity#0" />
+            <element signature="method#askPermission#0;class#HomeActivity#0" />
+            <element signature="method#getLocation#0;class#HomeActivity#0" />
+            <element signature="method#getGPS#0;class#HomeActivity#0" />
           </folding>
         </state>
       </provider>
