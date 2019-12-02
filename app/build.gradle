@@ -30,6 +30,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'me.dm7.barcodescanner:zxing:1.9'
+    implementation 'com.sun.mail:android-mail:1.5.5'
+    implementation 'com.sun.mail:android-activation:1.5.5'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3' // for paypal payments
