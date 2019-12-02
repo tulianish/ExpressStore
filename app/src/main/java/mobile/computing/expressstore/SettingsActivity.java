@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
+
 public class SettingsActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
@@ -60,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("email", email);
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(this,"Email is copied to clipboard!", Toast.LENGTH_SHORT).show();
+        Toasty.info(this,"Email is copied to clipboard!", Toast.LENGTH_SHORT, true).show();
     }
 
     public void openOtherSettings(View view)
