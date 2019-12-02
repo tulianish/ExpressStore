@@ -229,7 +229,7 @@ public class EditProfileActivity extends AppCompatActivity {
         if(id == android.R.id.home)
         {
             this.finish();
-        }else if(id == R.id.home) {
+        }else if(id == R.id.btn_home) {
             startActivity(new Intent(getApplicationContext(),HomeActivity.class));
         }
 
