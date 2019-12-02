@@ -60,7 +60,7 @@ public class Custom_adap extends RecyclerView.Adapter<Custom_adap.ItemViewHolder
 
         CartActivity.total_amt += qty*sale_price;
         if(position==cartitems.size()-1) {
-            CartActivity.tv_total_amt.setText("$" + CartActivity.total_amt);
+            CartActivity.tv_total_amt.setText("$" + String.format("%.2f", CartActivity.total_amt));
         }
 
         Picasso.get().setLoggingEnabled(true);

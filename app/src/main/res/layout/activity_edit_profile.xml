@@ -19,9 +19,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_width="223dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -34,10 +36,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="221dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_name">
 
@@ -52,10 +54,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_email">
 
@@ -69,10 +71,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="221dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_number">
 
@@ -86,10 +88,10 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_password_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_password">
 
@@ -97,7 +99,6 @@
             android:id="@+id/edit_password_confirm_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
             android:hint="@string/confirm_new_password" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +115,7 @@
             android:id="@+id/edit_cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="60dp"
             android:background="@drawable/rounded_btn"
             android:text="@string/cancel"
             android:textColor="@color/colorWhite"
@@ -125,7 +126,7 @@
             android:id="@+id/edit_saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
+            android:layout_marginStart="72dp"
             android:background="@drawable/rounded_btn"
             android:text="@string/save"
             android:textColor="@color/colorWhite"

@@ -62,7 +62,7 @@ public class ContactUsActivity extends AppCompatActivity {
         {
             Intent sendMail = new Intent(Intent.ACTION_SEND);
             sendMail.setType("plain/text");
-            sendMail.putExtra(Intent.EXTRA_EMAIL, new String[]{"sh941551@dal.ca"});
+            sendMail.putExtra(Intent.EXTRA_EMAIL, new String[]{"expressstoreapp@gmail.com"});
             sendMail.putExtra(Intent.EXTRA_SUBJECT, subjectData);
             sendMail.putExtra(Intent.EXTRA_TEXT, "Name: " + nameData + "\n\nFeedback:\n" + messageData);
             startActivity(Intent.createChooser(sendMail, "Send Feedback"));

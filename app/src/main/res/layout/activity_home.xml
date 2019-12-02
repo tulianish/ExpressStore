@@ -38,7 +38,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@id/order1"
             android:layout_marginRight="20dp"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/startScan"
@@ -47,7 +48,8 @@
             android:clickable="true"
             android:layout_alignBottom="@id/order1"
             android:layout_marginLeft="20dp"
-            app:srcCompat="@android:drawable/ic_menu_add" />
+            app:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/manual" />
 
         <TextView
             android:id="@+id/noOrders"

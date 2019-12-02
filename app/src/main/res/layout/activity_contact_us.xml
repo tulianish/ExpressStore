@@ -8,26 +8,24 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_marginTop="125dp"
-        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/we_appreciate_your_feedback"
-        android:textSize="30sp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
+        android:text="@string/we_appreciate_your_feedback"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="271dp"
+        android:layout_height="49dp"
         android:layout_marginHorizontal="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -40,11 +38,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout6"
-        android:layout_marginVertical="10dp"
+        android:layout_width="276dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
 
@@ -57,39 +56,37 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
+        android:layout_width="273dp"
+        android:layout_height="161dp"
         android:layout_marginHorizontal="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
-        app:layout_constraintVertical_bias="0">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/feedbackMessage"
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:hint="@string/message"
-            android:gravity="start"/>
+            android:gravity="start"
+            android:hint="@string/message" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/submit"
-        android:textSize="24sp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rounded_btn"
         android:onClick="submitFeedback"
-        android:background="@color/colorSkyBlue"
-        android:textColor="@color/colorWhite"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/submit"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
-        app:layout_constraintVertical_bias="0.547" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
