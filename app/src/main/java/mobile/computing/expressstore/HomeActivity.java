@@ -10,9 +10,11 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,8 @@ public class HomeActivity extends AppCompatActivity {
     private ExpandableListAdapter expandableListAdapter;
 
     private FloatingActionButton shop;
+    private FloatingActionButton manuallyAdd;
+
 
     private TextView noOrders;
 
@@ -66,6 +70,8 @@ public class HomeActivity extends AppCompatActivity {
 
     LocationManager locationManager;
     String l1, l2;
+    public String inputCode = "";
+
 
     @Override
     public void onBackPressed() {
@@ -87,6 +93,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Get cust_id from user_login activity;
+        prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
+        prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        cust_id = prefs2.getString("customerID","NA");
+
         requestPermissions(new String[]{
                         Manifest.permission.CAMERA,
                         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -95,17 +106,14 @@ public class HomeActivity extends AppCompatActivity {
                 REQUEST);
         askPermission();
 
-        //Get cust_id from user_login activity;
-        prefs = getApplicationContext().getSharedPreferences("mobile.computing.expressstore", Context.MODE_PRIVATE);
-        prefs2 = getApplicationContext().getSharedPreferences("userdata", Context.MODE_PRIVATE);
-        cust_id = prefs2.getString("customerID","NA");
-
-        expandableListView = findViewById(R.id.order1);
+         expandableListView = findViewById(R.id.order1);
         shop = findViewById(R.id.startShop);
         noOrders = findViewById(R.id.noOrders);
+        manuallyAdd = findViewById(R.id.startScan);
 
         requestQueue = Volley.newRequestQueue(this);
         storeList = new ArrayList<>();
+        final ScannerScreen manualInput = new ScannerScreen();
         getStoreData();
         getStoreData();
 
@@ -136,6 +144,35 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        manuallyAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(HomeActivity.this)
+                        .setTitle("Manual Item Addition")
+                        .setMessage("Please type the barcode manually")
+                        .setCancelable(false);
+
+                final EditText codeInput = new EditText(HomeActivity.this);
+                codeInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alertBuilder.setView(codeInput);
+                alertBuilder.setPositiveButton("Add Item", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputCode = codeInput.getText().toString();
+                        manualInput.fetchProductDetails(inputCode, HomeActivity.this);
+                    }
+                });
+                alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                alertBuilder.show();
+
+            }
+        });
 
     }
 
