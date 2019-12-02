@@ -3,6 +3,8 @@
     package="mobile.computing.expressstore">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -11,9 +13,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -21,14 +22,14 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".InfoActivity" />
         <activity android:name=".CartActivity" />
-        <activity android:name=".SplashScreen"/>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".forgotpassword"/>
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity"/>
         <activity android:name=".ScannerScreen" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".PaymentDetails" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

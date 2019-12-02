@@ -71,6 +71,7 @@ public class CartActivity extends AppCompatActivity {
         super.onBackPressed();
         total_amt=0.0;
         save_cart_state();
+        this.finish();
     }
 
     @Override
