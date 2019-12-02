@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.paypal.android.sdk.payments.LoginActivity;
-
 import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -24,6 +22,12 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     TextView emailData, nameData;
     final static String userPref = "userdata";
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
                 break;
             case R.id.logoutSection:
                 sharedPreferences.edit().clear().apply();
-                // TODO : ADD LOGIN ACTIVITY
-                intent = new Intent(SettingsActivity.this, CartActivity.class);
+                intent = new Intent(SettingsActivity.this, LoginActivity.class);
                 startActivity(intent);
                 break;
         }

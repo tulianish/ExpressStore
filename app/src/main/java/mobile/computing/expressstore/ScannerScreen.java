@@ -51,6 +51,12 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
     public static ArrayList<Items_Model> scannedProductList = new ArrayList<>();
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         scannerView = new ZXingScannerView(this);

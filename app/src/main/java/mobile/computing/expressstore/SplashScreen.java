@@ -3,6 +3,7 @@ package mobile.computing.expressstore;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,13 +21,14 @@ public class SplashScreen extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+
         // Get Handler to display splash-screen for 500 milliseconds
         handler=new Handler();
         // Create new thread for delay
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(SplashScreen.this, CartActivity.class);
+                Intent intent=new Intent(SplashScreen.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
