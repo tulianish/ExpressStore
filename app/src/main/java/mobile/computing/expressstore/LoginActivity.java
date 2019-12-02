@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     String encryptedpass = "";
     private static final String KEY = "1Hbfh667adfDEJ78";
 
+    String spass = "";
+    String semail = "";
     int flag = 1;
 
     SharedPreferences mySharedPreferences;
@@ -42,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
 
     final String login =  "https://expressstorecsci.000webhostapp.com/getusercred.php?usr_email=";
     String furl;
-
 
     @Override
     public void onBackPressed() {
@@ -65,11 +66,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                flag = 1;
                 email = findViewById(R.id.inp_Email);
                 pass = findViewById(R.id.inp_Pass);
 
-                String semail = email.getText().toString();
-                String spass = pass.getText().toString();
+                semail = email.getText().toString();
+                spass = pass.getText().toString();
 
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
@@ -104,9 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         e.printStackTrace();
                     }
-
                 }
-
             }
         });
 
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                         if (response.equals("-1"))
                         {
-                            Toast.makeText(LoginActivity.this,response,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Wrong Email or Password",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
