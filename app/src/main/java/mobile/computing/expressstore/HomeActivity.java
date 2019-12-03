@@ -43,6 +43,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class HomeActivity extends AppCompatActivity {
@@ -277,7 +278,7 @@ public class HomeActivity extends AppCompatActivity {
                 getStoreList(location);
                 getSuperStoreList(location);
                 try {
-                    Toast.makeText(getApplicationContext(), storeList.get(0), Toast.LENGTH_SHORT).show();
+                    Toasty.success(getApplicationContext(), storeList.get(0), Toast.LENGTH_SHORT, true).show();
                     SharedPreferences.Editor editor = prefs.edit();
 
                     int store_id;
@@ -394,7 +395,7 @@ public class HomeActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(HomeActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toasty.error(HomeActivity.this,error.getMessage(),Toast.LENGTH_SHORT, true).show();
             }
         }){
             @Override
@@ -463,7 +464,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(), ""+error.getMessage(), Toast.LENGTH_SHORT, true).show();
             }
         }
         );
@@ -500,7 +501,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toasty.error(getApplicationContext(), ""+error.getMessage(), Toast.LENGTH_SHORT, true).show();
             }
         }
         );
@@ -544,7 +545,7 @@ public class HomeActivity extends AppCompatActivity {
             }
             else
             {
-                Toast.makeText(this, "can't Get Your Location", Toast.LENGTH_SHORT).show();
+                Toasty.error(this, "can't Get Your Location", Toast.LENGTH_SHORT, true).show();
             }
 
         }

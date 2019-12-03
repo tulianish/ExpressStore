@@ -22,6 +22,8 @@ import com.scottyab.aescrypt.AESCrypt;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -145,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                         if (response.equals("-1"))
                         {
-                            Toast.makeText(LoginActivity.this,"Wrong Email or Password",Toast.LENGTH_SHORT).show();
+                            Toasty.error(LoginActivity.this,"Wrong Email or Password",Toast.LENGTH_SHORT, true).show();
                         }
                         else
                         {
@@ -178,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivity.this,error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toasty.error(LoginActivity.this,error.getMessage(), Toast.LENGTH_SHORT, true).show();
             }
         });
 
