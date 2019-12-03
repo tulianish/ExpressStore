@@ -157,7 +157,8 @@ public class ScannerScreen extends AppCompatActivity implements ZXingScannerView
                                 scannedProductList.add(new Items_Model(scannedCode, imageURL, productName, Double.parseDouble(price), Double.parseDouble(price), 1));
                             }
 
-                            Toasty.info(cc, productName + " successfully added to the cart.", Toast.LENGTH_SHORT, true).show();
+                            //Toasty.info(cc, productName + " successfully added to the cart.", Toast.LENGTH_SHORT, true).show();
+                            Toasty.info(cc, "Product added to the cart.", Toast.LENGTH_SHORT, true).show();
 
                         } else {
                             Toasty.error(cc, "This item does not belong to " + prefs.getString("store_name", "the store") + ". Please contact a representative!", Toast.LENGTH_SHORT, true).show();
