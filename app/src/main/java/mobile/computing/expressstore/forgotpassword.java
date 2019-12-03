@@ -26,6 +26,8 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.util.Properties;
 
+import es.dmoral.toasty.Toasty;
+
 public class forgotpassword extends AppCompatActivity {
 
     private Button SendEmail;
@@ -77,7 +79,7 @@ public class forgotpassword extends AppCompatActivity {
                             try {
 
                                 if (response.equals("-1")) {
-                                    Toast.makeText(forgotpassword.this, "Email not exist", Toast.LENGTH_SHORT).show();
+                                    Toasty.error(forgotpassword.this, "Email not exist", Toast.LENGTH_SHORT, true).show();
                                 } else {
 
                                     try {
@@ -90,7 +92,7 @@ public class forgotpassword extends AppCompatActivity {
                                     }
                                     catch (Exception e)
                                     {
-                                        Toast.makeText(forgotpassword.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toasty.error(forgotpassword.this, ""+e.getMessage(), Toast.LENGTH_SHORT, true).show();
                                         e.printStackTrace();
                                     }
 
@@ -102,7 +104,7 @@ public class forgotpassword extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(forgotpassword.this, "error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toasty.error(forgotpassword.this, "error:" + error.getMessage(), Toast.LENGTH_SHORT, true).show();
                         }
                     });
                     Volley.newRequestQueue(forgotpassword.this).add(stringRequest);
@@ -158,7 +160,7 @@ public class forgotpassword extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(forgotpassword.this, "Weak Internet connectivity! Please try again.", Toast.LENGTH_LONG).show();
+                    Toasty.error(forgotpassword.this, "Weak Internet connectivity! Please try again.", Toast.LENGTH_LONG, true).show();
                 }
 
             } catch (MessagingException | IOException | InterruptedException e) {
@@ -171,7 +173,7 @@ public class forgotpassword extends AppCompatActivity {
         protected void onPostExecute(Integer val) {
             super.onPostExecute(val);
             progressDialog.dismiss();
-            Toast.makeText(forgotpassword.this, "Password sent to this email", Toast.LENGTH_LONG).show();
+            Toasty.info(forgotpassword.this, "Password sent to this email", Toast.LENGTH_LONG, true).show();
             startActivity(new Intent(forgotpassword.this,LoginActivity.class));
         }
     }
