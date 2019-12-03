@@ -1,0 +1,31 @@
+REFERENCES
+
+[1]"Projects – opensource.google.com", opensource.google.com, 2019. [Online]. Available: https://opensource.google/projects/zxing. [Accessed: 02- Dec- 2019].
+
+[2] A. Chugh, “Android ExpandableListView Example Tutorial,” JournalDev. [Online]. Available: https://www.journaldev.com/9942/android-expandablelistview-example-tutorial.
+
+[3] Lab 7 Currency App, CSCI5708 Mobile Computing.
+
+[4] Sjwall, “sjwall/MaterialTapTargetPrompt,” GitHub, 18-Aug-2019. [Online]. Available: https://github.com/sjwall/MaterialTapTargetPrompt. [Accessed: 03-Dec-2019].
+
+[5] “Request App Permissions  :   Android Developers,” Android Developers. [Online]. Available: https://developer.android.com/training/permissions/requesting. [Accessed: 03-Dec-2019].
+
+[6] L. Vogel, vogella.com. [Online]. Available: https://www.vogella.com/tutorials/AndroidPermissions/article.html. [Accessed: 03-Dec-2019].
+
+[7] W. Karim, “Multiple Runtime Permissions in Android Without Any Third-Party Libraries,” Medium, 23-Nov-2018. [Online]. Available: https://medium.com/mindorks/multiple-runtime-permissions-in-android-without-any-third-party-libraries-53ccf7550d0. [Accessed: 03-Dec-2019].
+
+[8] “Cryptography  :   Android Developers,” Android Developers. [Online]. Available: https://developer.android.com/guide/topics/security/cryptography. [Accessed: 03-Dec-2019].
+
+[9] Scottyab, “scottyab/AESCrypt-Android,” GitHub, 19-Dec-2017. [Online]. Available: https://github.com/scottyab/AESCrypt-Android. [Accessed: 03-Dec-2019].
+
+[10] Google, “google/gson,” GitHub, 05-Nov-2019. [Online]. Available: https://github.com/google/gson. [Accessed: 03-Dec-2019].
+
+[11] Mujjtahidah, “Parsing JSON on Android using GSON and Volley,” Medium, 05-Oct-2018. [Online]. Available: https://medium.com/quick-code/parsing-json-on-android-using-gson-and-volley-83d6715776f8. [Accessed: 03-Dec-2019].
+
+[12] Square, “square/picasso,” GitHub, 24-Oct-2019. [Online]. Available: https://github.com/square/picasso. [Accessed: 03-Dec-2019].
+
+[13] A. Chugh, “Android Picasso Tutorial,” JournalDev. [Online]. Available: https://www.journaldev.com/13759/android-picasso-tutorial. [Accessed: 03-Dec-2019].
+
+[14] N. Alam, “PayPal SDK Integration in Android Applications,” TO THE NEW BLOG. [Online]. Available: https://www.tothenew.com/blog/paypal-sdk-integration-in-android-applications/. [Accessed: 03-Dec-2019].
+
+[15] Paypal, “paypal/PayPal-Android-SDK,” GitHub, 15-Jan-2019. [Online]. Available: https://github.com/paypal/PayPal-Android-SDK. [Accessed: 03-Dec-2019].
